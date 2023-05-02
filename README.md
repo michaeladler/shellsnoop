@@ -1,3 +1,5 @@
+[![CI](https://github.com/michaeladler/shellsnoop/actions/workflows/ci.yml/badge.svg)](https://github.com/michaeladler/shellsnoop/actions/workflows/ci.yml)
+
 # shellsnoop
 
 shellsnoop is a tool that spies on shells and captures user input.

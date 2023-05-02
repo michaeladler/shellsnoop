@@ -1,0 +1,49 @@
+---
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: stable
+      - uses: korandoru/setup-zig@v1
+        with:
+          # zig cc is used to produce a statically linked client
+          zig-version: 0.10.1
+      - run: sudo apt-get update -q && sudo apt-get install -y --no-install-recommends clang-15 libbpf-dev
+      - name: build
+        uses: goreleaser/goreleaser-action@v4
+        with:
+          distribution: goreleaser
+          version: latest
+          args: build --clean --single-target --snapshot
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+          retention-days: 1
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.20"
+      - run: sudo apt-get update -q && sudo apt-get install -y --no-install-recommends clang-15 libbpf-dev
+      - run: go generate ./...
+      - uses: dominikh/staticcheck-action@v1.3.0
+        with:
+          version: "2023.1.3"
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: "v1.52.2"

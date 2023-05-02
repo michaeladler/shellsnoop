@@ -1,0 +1,66 @@
+---
+project_name: shellsnoop
+
+before:
+  hooks:
+    - go mod download
+    - go generate ./...
+    - make CC="zig cc" CFLAGS="-target x86_64-linux-musl -static -Os -Wall -Wextra -Werror" shellsnoop-client
+    - strip shellsnoop-client
+
+builds:
+  - id: shellsnoop
+    binary: shellsnoop
+    main: main.go
+    flags:
+      - -trimpath
+      - -mod=readonly
+    ldflags:
+      - -s -w
+      - -X main.Commit={{.Commit}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+    goamd64:
+      - v3
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+archives:
+  - id: shellsnoop
+    builds:
+      - shellsnoop
+    name_template: >-
+      {{.Binary}}-{{.Version}}-{{.Os}}-{{- if eq .Arch "amd64" }}x86_64{{ else }}{{.Arch}}{{ end }}{{ if .Arm }}v{{.Arm }}{{ end }}
+    format: tar.xz
+    files:
+      - shellsnoop-client
+
+checksum:
+  name_template: "{{.ProjectName}}_{{.Version}}_SHA256SUMS"
+  algorithm: sha256
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  groups:
+    - title: Features
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: "Bug fixes"
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 1
+    - title: Others
+      order: 999
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+release:
+  github:
+    owner: michaeladler
+    name: shellsnoop
