@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs = inputs @ { self, nixpkgs }:
 
@@ -38,17 +38,14 @@
             };
           });
 
-      nixosModules.default = import ./module.nix inputs;
+      nixosModules.default = import ./nix/module.nix inputs;
 
 
       overlays.default = _: prev: {
-        shellsnoop = prev.callPackage ./release.nix {
+        shellsnoop = prev.callPackage ./nix/release.nix {
           rev = shortRev;
-          llvmPackages = prev.llvmPackages_15;
+          llvmPackages = prev.llvmPackages_16;
         };
       };
-
-
     };
-
 }

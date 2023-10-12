@@ -2,9 +2,9 @@
 
 buildGoModule rec {
   pname = "shellsnoop";
-  version = "0.1.0";
+  version = "unstable-2023-10-12";
 
-  src = ./.;
+  src = ../.;
 
   nativeBuildInputs = [
     llvmPackages.llvm
@@ -16,7 +16,7 @@ buildGoModule rec {
     libbpf
   ];
 
-  vendorHash = "sha256-ZjCkLcVm8JWXpJYvIYUr+f4LZyprmwfulePNpvz0vOk=";
+  vendorHash = "sha256-Wy72RwZhnwScVnQDv11BN52hDoWU+8sQIwRYeMURGiI=";
 
   ldflags = [
     "-s"
