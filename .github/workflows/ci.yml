@@ -1,0 +1,23 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v4
+        with:
+          go-version: stable
+      - run: sudo apt-get update -q && sudo apt-get install -y --no-install-recommends clang-15 libbpf-dev
+      - run: make
+      - uses: dominikh/staticcheck-action@v1.3.0
+        with:
+          install-go: false
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest
+          skip-cache: true
