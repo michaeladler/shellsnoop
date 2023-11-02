@@ -40,7 +40,6 @@
 
       nixosModules.default = import ./nix/module.nix inputs;
 
-
       overlays.default = _: prev: {
         shellsnoop = prev.callPackage ./nix/release.nix {
           rev = shortRev;
