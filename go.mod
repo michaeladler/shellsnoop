@@ -3,7 +3,7 @@ module github.com/michaeladler/shellsnoop
 go 1.20
 
 require (
-	github.com/charmbracelet/log v0.2.5
+	github.com/charmbracelet/log v0.3.1
 	github.com/cilium/ebpf v0.12.3
 	github.com/mkideal/cli v0.2.7
 	golang.org/x/sync v0.5.0
