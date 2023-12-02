@@ -18,6 +18,11 @@ func init() {
 	})
 }
 
-func SetLevel(level string) {
-	Logger.SetLevel(log.ParseLevel(level))
+func SetLevel(level string) error {
+	lvl, err := log.ParseLevel(level)
+	if err != nil {
+		return err
+	}
+	Logger.SetLevel(lvl)
+	return nil
 }

@@ -41,7 +41,9 @@ func main() {
 		}
 
 		logger := log.Logger
-		log.SetLevel(argv.Level)
+		if err := log.SetLevel(argv.Level); err != nil {
+			return err
+		}
 
 		logger.Info("Starting shellsnoop", "uid", argv.Uid, "socket", argv.Socket, "commit", Commit)
 
