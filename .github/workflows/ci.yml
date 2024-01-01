@@ -8,7 +8,7 @@ jobs:
     name: Build
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v5
         with:
           go-version: stable
       - run: sudo apt-get update -q && sudo apt-get install -y --no-install-recommends clang-15 libbpf-dev
