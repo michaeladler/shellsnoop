@@ -16,7 +16,7 @@ buildGoModule rec {
     libbpf
   ];
 
-  vendorHash = "sha256-cTtTCl1ku/D4alt1OrI7dWdzRuGfbBbLpbRJrIDRL7o=";
+  vendorHash = "sha256-PClTDihb5CinZPwJmLQh1CPI/BSMDLxwQ+Er8+H7H1Q=";
 
   ldflags = [
     "-s"
