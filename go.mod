@@ -3,7 +3,7 @@ module github.com/michaeladler/shellsnoop
 go 1.20
 
 require (
-	github.com/charmbracelet/log v0.3.1
+	github.com/charmbracelet/log v0.4.0
 	github.com/cilium/ebpf v0.12.3
 	github.com/mkideal/cli v0.2.7
 	golang.org/x/sync v0.6.0
@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/charmbracelet/lipgloss v0.9.1 // indirect
+	github.com/charmbracelet/lipgloss v0.10.0 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
