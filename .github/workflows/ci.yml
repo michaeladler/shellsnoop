@@ -13,7 +13,7 @@ jobs:
           go-version: stable
       - run: sudo apt-get update -q && sudo apt-get install -y --no-install-recommends clang-15 libbpf-dev
       - run: make
-      - uses: dominikh/staticcheck-action@v1.3.0
+      - uses: dominikh/staticcheck-action@v1.3.1
         with:
           install-go: false
       - name: golangci-lint
