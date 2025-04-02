@@ -1,6 +1,6 @@
 module github.com/michaeladler/shellsnoop
 
-go 1.20
+go 1.23.0
 
 require (
 	github.com/charmbracelet/log v0.4.1
