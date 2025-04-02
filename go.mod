@@ -7,7 +7,7 @@ require (
 	github.com/cilium/ebpf v0.12.3
 	github.com/mkideal/cli v0.2.7
 	golang.org/x/sync v0.12.0
-	golang.org/x/sys v0.30.0
+	golang.org/x/sys v0.31.0
 )
 
 require (
